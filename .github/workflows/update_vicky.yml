@@ -1,9 +1,12 @@
-name: Update Jio (__hdnea__) + Zee5 (hdntl) tokens in vicky.json
+name: Update  (__hdnea__) +  (hdntl) tokens in vicky.json
 
 on:
   schedule:
     - cron: '0 */11 * * *'  # every 12 hours
-  workflow_dispatch:
+  workflow_dispatch: 
+
+permissions:
+  contents: write
 
 jobs:
   update-json-tokens:
@@ -20,7 +23,7 @@ jobs:
         jio_cookie=$(grep -o '__hdnea__=[^"]*' jio.m3u | head -n1)
         echo "$jio_cookie" > jio_cookie.txt
 
-        # Fetch Zee5 playlist for hdntl token
+        # Fetch playlist for hdntl token
         curl -sL -o zee.m3u "https://raw.githubusercontent.com/alex4528/m3u/refs/heads/main/z5.m3u"
         zee_hdntl=$(grep -o 'hdntl=[^"]*' zee.m3u | head -n1)
         echo "$zee_hdntl" > zee_hdntl.txt
